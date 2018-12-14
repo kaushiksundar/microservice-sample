@@ -1,0 +1,21 @@
+{
+  "name": "docker-express-gateway",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "./build.sh",
+    "upui": "cd web && npm install && npm run start",
+    "down": "docker-compose down"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robertoachar/docker-express-gateway.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robertoachar/docker-express-gateway/issues"
+  },
+  "homepage": "https://github.com/robertoachar/docker-express-gateway#readme"
+}

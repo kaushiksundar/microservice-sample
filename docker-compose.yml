@@ -1,0 +1,76 @@
+version: '3'
+
+services:
+  # web:
+  #   build:
+  #     context: ./web
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "3006:3006"
+  #   volumes:
+  #     - ./web:/usr/src/app
+  #   networks:
+  #     - app-network
+  #   links:
+  #     - gateway
+
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./gateway:/usr/src/app
+    networks:
+      - app-network
+    links:
+      - heroes
+      - movies
+      - python_libs
+
+  heroes:
+    build:
+      context: ./heroes
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./heroes:/usr/src/app
+    networks:
+      - app-network
+    links:
+      - mongodb
+
+  movies:
+    build:
+      context: ./movies
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./movies:/usr/src/app
+    networks:
+      - app-network
+    links:
+      - mongodb
+
+  python_libs:
+    build:
+      context: ./python_libs
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./python_libs:/usr/src/app
+    networks:
+      - app-network
+
+  mongodb:
+    image: mongo
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
